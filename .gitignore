@@ -3,5 +3,3 @@ DESIGN.txt
 TODO.txt
 GoogleDocsParser.py
 /.spyproject
-/unit_tests/test_env_creds.json
-/unit_tests/unauth_creds.json
