@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module GoogleSheetsJobParser</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>GoogleSheetsJobParser</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:g%3A%5Cmy%20drive%5Cpython%20projects%5Claboratoryreportgenerator%5Cgooglesheetsjobparser.py">g:\my drive\python projects\laboratoryreportgenerator\googlesheetsjobparser.py</a></font></td></tr></table>
+    <p><tt>NOTE&nbsp;on&nbsp;google&nbsp;sheets&nbsp;format:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+The&nbsp;google&nbsp;sheets&nbsp;document&nbsp;must&nbsp;have&nbsp;the&nbsp;following:<br>
+Columns&nbsp;A&nbsp;and&nbsp;B&nbsp;from&nbsp;cell&nbsp;2&nbsp;down&nbsp;are&nbsp;all&nbsp;the&nbsp;sample&nbsp;details<br>
+Column&nbsp;A&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;detail&nbsp;and&nbsp;Column&nbsp;B&nbsp;is&nbsp;the&nbsp;value&nbsp;of&nbsp;the&nbsp;detail<br>
+Columns&nbsp;B&nbsp;and&nbsp;onwards&nbsp;can&nbsp;be&nbsp;anything&nbsp;but&nbsp;there&nbsp;must&nbsp;be&nbsp;three&nbsp;speicifc&nbsp;columns<br>
+Replicate,&nbsp;Test&nbsp;Name,&nbsp;Result<br>
+Each&nbsp;row&nbsp;in&nbsp;these&nbsp;columns&nbsp;is&nbsp;counted&nbsp;as&nbsp;a&nbsp;test&nbsp;result&nbsp;and&nbsp;are&nbsp;grouped&nbsp;together<br>
+by&nbsp;test&nbsp;name,&nbsp;replicate<br>
+All&nbsp;rows&nbsp;must&nbsp;have&nbsp;a&nbsp;unique&nbsp;TestName-Replicate&nbsp;combination&nbsp;or&nbsp;an&nbsp;error&nbsp;is&nbsp;shown</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="GoogleSheetsJobParser.html#GoogleSheetsJobParser">GoogleSheetsJobParser</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GoogleSheetsJobParser">class <strong>GoogleSheetsJobParser</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Opens&nbsp;a&nbsp;google&nbsp;sheets&nbsp;document&nbsp;and&nbsp;parses&nbsp;the&nbsp;contents&nbsp;into&nbsp;a&nbsp;job&nbsp;class<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="GoogleSheetsJobParser-__init__"><strong>__init__</strong></a>(self)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="GoogleSheetsJobParser-parse_details"><strong>parse_details</strong></a>(self, sheet, job, service, document_id)</dt><dd><tt>Parses&nbsp;the&nbsp;details&nbsp;tab&nbsp;which&nbsp;has&nbsp;information&nbsp;about&nbsp;the&nbsp;report<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sheet&nbsp;(google&nbsp;sheet):&nbsp;The&nbsp;google&nbsp;sheet&nbsp;to&nbsp;process<br>
+&nbsp;&nbsp;&nbsp;&nbsp;job&nbsp;(SRGJob):&nbsp;the&nbsp;pointer&nbsp;to&nbsp;the&nbsp;job&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;hold&nbsp;all&nbsp;the&nbsp;results<br>
+&nbsp;&nbsp;&nbsp;&nbsp;service&nbsp;(google&nbsp;sheets&nbsp;service):&nbsp;the&nbsp;google&nbsp;sheets&nbsp;api&nbsp;service<br>
+&nbsp;&nbsp;&nbsp;&nbsp;document_id&nbsp;(str):&nbsp;the&nbsp;google&nbsp;sheets&nbsp;document&nbsp;id&nbsp;to&nbsp;fetch&nbsp;and&nbsp;process</tt></dd></dl>
+
+<dl><dt><a name="GoogleSheetsJobParser-parse_document"><strong>parse_document</strong></a>(self, service, document_id)</dt><dd><tt>The&nbsp;main&nbsp;function&nbsp;that&nbsp;opens&nbsp;the&nbsp;document,&nbsp;parses&nbsp;the&nbsp;data&nbsp;into&nbsp;a&nbsp;jobs<br>
+<a href="builtins.html#object">object</a>&nbsp;and&nbsp;returns&nbsp;the&nbsp;resulting&nbsp;job&nbsp;with&nbsp;all&nbsp;the&nbsp;calculated&nbsp;values<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;service&nbsp;(google&nbsp;sheets&nbsp;service):&nbsp;the&nbsp;googlse&nbsp;sheets&nbsp;api&nbsp;service<br>
+&nbsp;&nbsp;&nbsp;&nbsp;document_id&nbsp;(str):&nbsp;the&nbsp;google&nbsp;sheets&nbsp;document&nbsp;id&nbsp;to&nbsp;fetch&nbsp;and&nbsp;process<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;job&nbsp;(SRGJob):&nbsp;the&nbsp;job&nbsp;<a href="builtins.html#object">object</a>&nbsp;containing&nbsp;all&nbsp;the&nbsp;job&nbsp;information<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;calculated&nbsp;results&nbsp;from&nbsp;the&nbsp;data</tt></dd></dl>
+
+<dl><dt><a name="GoogleSheetsJobParser-parse_sample"><strong>parse_sample</strong></a>(self, sheet, job, service, document_id)</dt><dd><tt>Parses&nbsp;each&nbsp;tab&nbsp;in&nbsp;the&nbsp;sheet&nbsp;as&nbsp;a&nbsp;separate&nbsp;sample.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sheet&nbsp;(google&nbsp;sheet):&nbsp;The&nbsp;google&nbsp;sheet&nbsp;to&nbsp;process<br>
+&nbsp;&nbsp;&nbsp;&nbsp;job&nbsp;(SRGJob):&nbsp;the&nbsp;pointer&nbsp;to&nbsp;the&nbsp;job&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;hold&nbsp;all&nbsp;the&nbsp;results<br>
+&nbsp;&nbsp;&nbsp;&nbsp;service&nbsp;(google&nbsp;sheets&nbsp;service):&nbsp;the&nbsp;google&nbsp;sheets&nbsp;api&nbsp;service<br>
+&nbsp;&nbsp;&nbsp;&nbsp;document_id&nbsp;(str):&nbsp;the&nbsp;google&nbsp;sheets&nbsp;document&nbsp;id&nbsp;to&nbsp;fetch&nbsp;and&nbsp;process</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

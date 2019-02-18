@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module StatCalculator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>StatCalculator</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:g%3A%5Cmy%20drive%5Cpython%20projects%5Claboratoryreportgenerator%5Cstatcalculator.py">g:\my drive\python projects\laboratoryreportgenerator\statcalculator.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="statsmodels.api.html">statsmodels.api</a><br>
+</td><td width="25%" valign=top><a href="scipy.stats.html">scipy.stats</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-compare_anova"><strong>compare_anova</strong></a>(sample_results, comparison_sample_name, min_p=0.05)</dt><dd><tt>Run&nbsp;a&nbsp;anova&nbsp;analysis&nbsp;on&nbsp;the&nbsp;whole&nbsp;set&nbsp;of&nbsp;results&nbsp;and&nbsp;then&nbsp;compare<br>
+the&nbsp;comparison_sample_name&nbsp;to&nbsp;each&nbsp;other&nbsp;product&nbsp;in&nbsp;the&nbsp;set.&nbsp;Creates&nbsp;3&nbsp;lists<br>
+of&nbsp;samples&nbsp;that&nbsp;the&nbsp;comnparison&nbsp;sample&nbsp;is&nbsp;better&nbsp;than,&nbsp;no&nbsp;statistical&nbsp;difference<br>
+to&nbsp;and&nbsp;where&nbsp;the&nbsp;sample&nbsp;is&nbsp;worse&nbsp;than&nbsp;the&nbsp;comparison&nbsp;sample<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;sample_results&nbsp;(DataFrame):&nbsp;A&nbsp;dataframe&nbsp;of&nbsp;the&nbsp;all&nbsp;the&nbsp;results,&nbsp;one&nbsp;column&nbsp;is<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sample&nbsp;name&nbsp;and&nbsp;another&nbsp;is&nbsp;result<br>
+&nbsp;&nbsp;&nbsp;&nbsp;comparison_sample_name&nbsp;(str):&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;sample&nbsp;to&nbsp;run&nbsp;the<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comparisons&nbsp;against<br>
+&nbsp;&nbsp;&nbsp;&nbsp;min_p&nbsp;(float):&nbsp;minimum&nbsp;p&nbsp;value&nbsp;to&nbsp;be&nbsp;insignificant&nbsp;ie.&nbsp;0.05&nbsp;=&nbsp;95%&nbsp;confidence&nbsp;level<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(str[],&nbsp;str[],&nbsp;str[]):&nbsp;Tuple&nbsp;of&nbsp;arrays,&nbsp;the&nbsp;first&nbsp;being&nbsp;the&nbsp;list&nbsp;of&nbsp;product&nbsp;names<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;comparison&nbsp;sample&nbsp;is&nbsp;better&nbsp;than,&nbsp;the&nbsp;second&nbsp;is&nbsp;the&nbsp;list&nbsp;of&nbsp;products<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;that&nbsp;no&nbsp;statistical&nbsp;difference&nbsp;was&nbsp;found,&nbsp;the&nbsp;third&nbsp;is&nbsp;the&nbsp;list&nbsp;of&nbsp;products<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;the&nbsp;comparison&nbsp;sample&nbsp;is&nbsp;worse&nbsp;than</tt></dd></dl>
+ <dl><dt><a name="-mean"><strong>mean</strong></a>(list)</dt></dl>
+</td></tr></table>
+</body></html>
