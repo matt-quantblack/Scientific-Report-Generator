@@ -1,0 +1,8 @@
+2019-02-19 10:18:30.097369: SRG session 20190219101830 Started.
+2019-02-19 10:22:37.099882: PROCESS command found for file: PROCESS Laundry Standard 201118
+2019-02-19 10:22:37.108858: Spreedsheet PROCESS Laundry Standard 201118 is being processed.
+2019-02-19 10:22:45.329695: Spreedsheet PROCESS Laundry Standard 201118 has parsed 3 products successfully.
+2019-02-19 10:22:47.287901: Downloaded template TestDoc.docx
+2019-02-19 10:22:48.743010: Genereated report.
+2019-02-19 10:22:50.636812: Uploaded report.
+2019-02-19 10:22:52.286257: File TR7 10056-1 - Laundry Powder.docx is now shared with brian@enzymelabs.com.au

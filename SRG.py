@@ -14,7 +14,7 @@ def main():
     #session.lock files are what keep the background threads running
     #removing a session.lock file with terminate the background thread loop
     #session.lock files are in the format session-{sessionId}.lock
-    session_path = os.path.join(os.path.dirname(os.path.realpath(__file__), "session-*"))
+    session_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "session-*")
         
     if 'start' in sys.argv:
         #Can only have one session running at a time

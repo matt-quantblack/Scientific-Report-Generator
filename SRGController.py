@@ -121,7 +121,12 @@ class SRGController:
         self.permission_id = response.get('user').get('permissionId')
         
         #get the team drive id if one is shared with this account
-        response = self.service.teamdrives().list(pageToken=None).execute()
+        try:
+            response = self.service.teamdrives().list(pageToken=None).execute()
+        except errors.HttpError:
+            self.display_error("Could not find team drives. Did you share the folder with the service account email instead of the personal email address? Service account email needs access.")
+            return False
+        
         team_drives = response.get('teamDrives', [])
         if len(team_drives) > 0:
             self.team_drive_id = team_drives[0].get('id')
