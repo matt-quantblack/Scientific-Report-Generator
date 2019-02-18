@@ -21,7 +21,7 @@ docx
 - 'SRG.py stop' will stop any background running process
 - Create a google account for the report generating robot
 - Create a ReportTemplate.docx and save in a team drive shared with the report robot account or share the file with report_robot account
-- Create a google sheets document with a details page and each samples result on each tab. Save on team drive or share with report_robot
+- Create a google sheets document (Use SampleDataEntry.gsheet as an example format) with a details page and each samples result on each tab. Save on team drive or share with report_robot
 - When ready to build the report change filename to start with PROCESS 
 - Change will be picked up, processed and report link will be emailed to the ShareWith email address
 - Save the report in the desired folder
