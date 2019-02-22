@@ -426,7 +426,7 @@ class ResultsTableBuilder:
             try:
                 better_than, no_diff, worse_than = compare_anova(all_results, sample.build_name(compare_name_fields))
             except ValueError:     
-                raise ValueError("{0} for {1} error in values!".format(test, comparing_sample_name))
+                raise ValueError("{0} for {1} error in values for ANOVA tables!".format(test, sample.build_name(compare_name_fields)))
             
             #work out how many table rows are needed
             max_rows = max(len(better_than), len(no_diff), len(worse_than))

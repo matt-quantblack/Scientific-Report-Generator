@@ -260,15 +260,16 @@ class SRGController:
                 table_builder = ResultsTableBuilder()
                 try:
                     tables = table_builder.create_tables(table_commands, job)
-                except ValueError:
+                except (ValueError, KeyError) as ex:
                     self.display_error("Could not build the results tables")
+                    self.display_error(str(ex))
                     return
                 
                 #generate the word document now that all the data is ready to insert
                 try:
                     doc_parser.generate_report(self.full_path(name), job.fields, tables)
                 except KeyError as ex:
-                    self.display_error(ex)
+                    self.display_error(str(ex))
                 
                 self.display_message("Genereated report.")
                 
