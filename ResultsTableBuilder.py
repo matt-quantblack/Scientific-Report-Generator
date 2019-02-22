@@ -319,10 +319,10 @@ class ResultsTableBuilder:
                 
                 test = test.strip()
                 
+                #create the row starting with the test name
+                row = [test]
+                
                 if test in sample.test_results_values:
-                    
-                    #create the row starting with the test name
-                    row = [test]
                     
                     #add a cell for each of the test replicates
                     #use the string represenation of these results that would
@@ -362,14 +362,15 @@ class ResultsTableBuilder:
                     row.append(std_val)
                     
                 else: #blank cell if data is missing
-                    row.append("")
-            
+                    for i in range(max_reps + 3):
+                        row.append("")
+                        
                 #append to the table
                 table.add_row(row)
                 
-                #default is vertical so flip if orientation is horizontal
-                if orientation == "Horizontal":
-                    table.transpose()
+            #default is vertical so flip if orientation is horizontal
+            if orientation == "Horizontal":
+                table.transpose()
                 
             tables.append(table)
             

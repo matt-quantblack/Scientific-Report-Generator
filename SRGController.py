@@ -265,7 +265,10 @@ class SRGController:
                     return
                 
                 #generate the word document now that all the data is ready to insert
-                doc_parser.generate_report(self.full_path(name), job.fields, tables)
+                try:
+                    doc_parser.generate_report(self.full_path(name), job.fields, tables)
+                except KeyError as ex:
+                    self.display_error(ex)
                 
                 self.display_message("Genereated report.")
                 
