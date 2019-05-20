@@ -143,7 +143,7 @@ class SampleData:
                 and the result as an integer
             
         Returns:
-            double: The average result
+            int: The average result to the nearest int, corresponds to the factor index
         """
         if test_name in self.test_results:
             if len(self.test_results[test_name]) > 0:
@@ -152,9 +152,10 @@ class SampleData:
                 for result in self.test_results[test_name]:
                     
                     if result in factor_values[test_name]:
-                        tally += factor_values[test_name][result]
+                        tally += factor_values[test_name].index(result)
                 
-                return tally / len(self.test_results[test_name])
+                #round to the nearest factor
+                return round(tally / len(self.test_results[test_name]))
         
         #return zero by default
         return 0

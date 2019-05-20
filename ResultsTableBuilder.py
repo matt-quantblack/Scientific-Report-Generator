@@ -46,11 +46,8 @@ class ResultsTableBuilder:
                     
                 #summary table will list all samples and the avergae result
                 #for each test
-                if table_type == "SummaryTable" and len(command_split) >= 4:
-                    #orientation is optional so set this to Vertical as default
-                    if len(command_split) == 4:
-                        command_split.append("Vertical")
-                    
+                if table_type == "SummaryTable" and len(command_split) > 4:
+               
                     #part 2 = sample name, part 3 = test names, 
                     #part 4 = number precision, part 5 is orientation
                     #part 6 = widths of columns
@@ -66,10 +63,7 @@ class ResultsTableBuilder:
                     
                 #SampleResultsTable provides a separate table for each sample
                 #with the result for each replicate of each test, std and average
-                if table_type == "SampleResultsTable" and len(command_split) >= 4:
-                    #orientation is optional so set this to Vertical as default
-                    if len(command_split) == 4:
-                        command_split.append("Vertical")
+                if table_type == "SampleResultsTable" and len(command_split) > 4:
                     
                     #part 2 = sample name, part 3 = test names, 
                     #part 4 = number precision, part 5 is orientation
@@ -105,6 +99,7 @@ class ResultsTableBuilder:
                 
                 if table is not None:
                         tables[command] = table
+               
                         
                     
                     
@@ -218,23 +213,25 @@ class ResultsTableBuilder:
             
             #go through each of the requested tests and fill in the data from the
             #sample.
-            for test in tests:       
-                
+            for test in tests:   
+                                
                 test = test.strip()
                 
-                if test in sample.test_results_values:
+                if test in sample.test_results:
                     
+  
                     #get the average result of all the tests
-                    if test in factor_values: #ordinal values                  
+                    if test in factor_values: #ordinal values          
                         result = sample.result_average_ordinal(test, factor_values)
+                        val = factor_values[test][result]
+                        
                     else: #numerical
-                        result = sample.result_average(test)
-                    
-                    #format this as a string to the correct precision
-                    val = "{0}".format(round(result, report_precision))
-                    #check if this is a percentage and add the percent sign
-                    if test in sample.test_units:
-                        val += sample.test_units[test]
+                        result = sample.result_average(test)                    
+                        #format this as a string to the correct precision
+                        val = "{0}".format(round(result, report_precision))
+                        #check if this is a percentage and add the percent sign
+                        if test in sample.test_units:
+                            val += sample.test_units[test]
                     
                     #add the cell
                     row.append(val)
@@ -244,7 +241,7 @@ class ResultsTableBuilder:
             
             #append to the table
             table.add_row(row)
-            
+
         #default is vertical so flip if orientation is horizontal
         if orientation == "Horizontal":
             table.transpose()
@@ -262,7 +259,7 @@ class ResultsTableBuilder:
             precision (str): An integer, as a string, for the number of decimal places
                 to report
             orientation (str): Vertical-lists tests vertically, Horizontal-lists
-                stains horizontally
+                tests horizontally
             widths (str): the widths string that specifies the column widths
             job (SRGJob): the job object that contains all the samples and thier data
             
@@ -312,7 +309,7 @@ class ResultsTableBuilder:
             header_row.append("Average") 
             header_row.append("Std. Dev.") 
             table.set_columns(header_row)
-            
+  
             #go through each of the requested tests and fill in the data from the
             #sample.
             for test in tests:      
@@ -322,7 +319,7 @@ class ResultsTableBuilder:
                 #create the row starting with the test name
                 row = [test]
                 
-                if test in sample.test_results_values:
+                if test in sample.test_results:
                     
                     #add a cell for each of the test replicates
                     #use the string represenation of these results that would
@@ -342,14 +339,19 @@ class ResultsTableBuilder:
                     if test in factor_values: #ordinal values                  
                         result = sample.result_average_ordinal(test, factor_values)
                         std_val = "" #no standard deviation for these tests
+                        result_val = "{0}".format(round(result, report_precision))
+                    #non numerical results without factors won't have an everage or std
+                    elif test not in sample.test_results_values:
+                        result_val = "N/A"
+                        std_val = "N/A"
                     else: #numerical
                         result = sample.result_average(test)                        
                         std = sample.result_std(test)
                         #format this as a string to the correct precision
                         std_val = "{0}".format(round(std, report_precision))
+                        #format this as a string to the correct precision
+                        result_val = "{0}".format(round(result, report_precision))
                     
-                    #format this as a string to the correct precision
-                    result_val = "{0}".format(round(result, report_precision))
                     
                     
                     #check if this is a percentage and add the percent sign
@@ -428,6 +430,26 @@ class ResultsTableBuilder:
             except ValueError:     
                 raise ValueError("{0} for {1} error in values for ANOVA tables!".format(test, sample.build_name(compare_name_fields)))
             
+            #create a row to hold the string list of all the items
+            row = ["","",""]
+            
+            for item in better_than:
+                if len(row[0]) > 0:
+                    row[0] += ", "
+                row[0] += item
+                
+            for item in no_diff:
+                if len(row[1]) > 0:
+                    row[1] += ", "
+                row[1] += item
+                
+            for item in worse_than:
+                if len(row[2]) > 0:
+                    row[2] += ", "
+                row[2] += item
+                
+            table.add_row(row)   
+            """
             #work out how many table rows are needed
             max_rows = max(len(better_than), len(no_diff), len(worse_than))
             
@@ -458,6 +480,7 @@ class ResultsTableBuilder:
                 table.add_row(row)
                 
                 index += 1
+            """
                 
             tables.append(table)
             
@@ -494,23 +517,22 @@ class ResultsTableBuilder:
                 
                 #add to the test name array
                 test_name = t_f[0]
+                
+                test_name = test_name.strip()
+                
                 mod_tests.append(test_name)
                 
                 if len(t_f) > 1:
                     
                     #strip the possible categorical values separated by :
-                    factors = t_f[1].split(':')
+                    factors = t_f[1].split(':')    
                     
-                    factor_values = {}
-                    
-                    #give each category a value starting from the first string, low to high
-                    value = 1
+                    #remove white space
                     for factor in factors:
-                        factor_values[factor] = value
-                        value += 1
-                    
+                        factor = factor.strip()
+              
                     #assign these values to a dict with the test name as key
-                    test_factors[test_name] = factor_values
+                    test_factors[test_name] = factors
             else:
                 #normal numerical values so just add the test name
                 mod_tests.append(test)    

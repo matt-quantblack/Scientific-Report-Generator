@@ -1,10 +1,9 @@
 credentials.json
-DESIGN.txt
-TODO.txt
 GoogleDocsParser.py
 /.spyproject
-activity.log
-errors.log
-status.txt
+*.log
+*.lock
+*.txt
 test.py
+*.docx
 

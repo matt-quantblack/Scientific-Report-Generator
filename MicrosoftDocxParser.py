@@ -220,14 +220,15 @@ class MicrosoftDocxParser:
                         
         
             for p_index in range(len(percents)):
-                val = 0
-                if percents[p_index].isdigit():
-                    val = int(percents[p_index])
-                elif type(p) == str and p == '*':
-                    val = asterix_value
-                elif type(p) == str and p == '**':
-                    val = double_asterix_value
-                new_table.columns[p_index].width = Inches(7.2 * val / 100)
+                if p_index < len(new_table.columns):
+                    val = 0
+                    if percents[p_index].isdigit():
+                        val = int(percents[p_index])
+                    elif type(p) == str and p == '*':
+                        val = asterix_value
+                    elif type(p) == str and p == '**':
+                        val = double_asterix_value
+                    new_table.columns[p_index].width = Inches(7.2 * val / 100)
    
         if result_table.title is not None:
             title_cells = new_table.rows[0].cells

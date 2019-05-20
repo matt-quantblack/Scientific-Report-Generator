@@ -315,6 +315,9 @@ class SRGController:
                         
                 if perm_granted:
                     self.display_message("File {0} is now shared with {1}".format(new_name, job.fields['ShareWith']))
+                    
+            else:
+                self.display_error("Could not find report template")
                         
 
     def display_message(self, message):
