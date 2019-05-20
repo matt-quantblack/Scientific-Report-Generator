@@ -68,8 +68,8 @@ def compare_anova(sample_results, comparison_sample_name, min_p=0.05):
             this_mean = mean(sample_data)
                         
             #conduct the t-test
-            #res = stats.stats.ttest_ind(comparison_sample_data,sample_data)            
-            res = stats.stats.ttest_rel(comparison_sample_data,sample_data)            
+            res = stats.stats.ttest_ind(comparison_sample_data,sample_data)            
+            #res = stats.stats.ttest_rel(comparison_sample_data,sample_data)            
             p = res.pvalue
             
             #if p < bon_corr than it is stat different
