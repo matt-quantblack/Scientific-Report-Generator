@@ -302,7 +302,7 @@ class ResultsTableBuilder:
             header_row = ["Test"]
             #Add a Result i column for each possible replicate
             #sample.get_max_replicates() is used to count how many columns are needed
-            max_reps = sample.get_max_replicates()
+            max_reps = sample.get_max_replicates(tests)
             for i in range(max_reps):
                 header_row.append("Result {0}".format(i+1))
             header_row.append("") #blank column
@@ -397,6 +397,11 @@ class ResultsTableBuilder:
         """
         test = test.strip()
         
+        requires_flip = '(FLIP)' in test.upper()
+        test = test.replace('(flip)','')
+        test = test.replace('(FLIP)','')
+        test = test.replace('(Flip)','')
+        
         #this will return an array of tables, one for each sample    
         tables = []
         
@@ -427,6 +432,8 @@ class ResultsTableBuilder:
             
             try:
                 better_than, no_diff, worse_than = compare_anova(all_results, sample.build_name(compare_name_fields))
+                if requires_flip:
+                    worse_than, better_than = better_than, worse_than
             except ValueError:     
                 raise ValueError("{0} for {1} error in values for ANOVA tables!".format(test, sample.build_name(compare_name_fields)))
             

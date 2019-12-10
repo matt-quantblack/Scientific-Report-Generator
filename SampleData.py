@@ -25,7 +25,7 @@ class SampleData:
         self.test_results_values = {}
         self.test_units = {}
         
-    def get_max_replicates(self):
+    def get_max_replicates(self, tests = None):
         """Gets the maximum number of replicates across all tests. Used
         for determing the number of columns used for displaying results
         
@@ -33,9 +33,13 @@ class SampleData:
             int: The maximum replicates            
         """
         
+        if tests == None:
+            tests = list(self.test_results.keys())
+        
         curr_max = 0
         #get all the results for each test
-        for test in self.test_results:
+        for test in tests:
+            test = test.strip()
             #count how may results in this test
             count = len(self.test_results[test])
             #update the max replicates

@@ -69,6 +69,8 @@ def compare_anova(sample_results, comparison_sample_name, min_p=0.05):
                         
             #conduct the t-test
             res = stats.stats.ttest_ind(comparison_sample_data,sample_data)            
+            #this one is for paired t-test but need to setup an option in the data
+            #sheet to select this instead of hardcoding
             #res = stats.stats.ttest_rel(comparison_sample_data,sample_data)            
             p = res.pvalue
             
