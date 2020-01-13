@@ -13,12 +13,13 @@
 """
 from SampleData import SampleData
 from SRGJob import SRGJob
-
+import time
 
 class GoogleSheetsJobParser:
     """ Opens a google sheets document and parses the contents into a job class """
     
-    def __init__(self):
+    def __init__(self, view):
+        self.view = view
         pass
     
 
@@ -48,12 +49,18 @@ class GoogleSheetsJobParser:
         
         #go through each sheet in the spreadsheets and process into a SampleData object
         for sheet in sheet_details.get('sheets'):
-                        
+                    
+            title = sheet.get('properties').get('title')
+            self.view.display_message("Processing: {}".format(title))
+            
             #special Details tab is used to extract the details required for the report
-            if sheet.get('properties').get('title') == "Details":
+            if title == "Details":
                 self.parse_details(sheet, job, service, document_id)
             else:
                 self.parse_sample(sheet, job, service, document_id)
+                
+            #slow down the requests as to not brech the x requets in 100 seconds
+            time.sleep(10)
             
     
         #return None if no samples were added to this job 

@@ -6,4 +6,4 @@ GoogleDocsParser.py
 *.txt
 test.py
 *.docx
-
+__pycache__

@@ -211,14 +211,15 @@ class SRGController:
         
         self.display_message("Spreedsheet {0} is being processed.".format(sheet_name))             
         
+        #remove the unique key PROCESS from the filename now the file has been processed
+        self.service.files().update(fileId=file_id, body={'name': sheet_name.replace('PROCESS ', '')}, supportsTeamDrives=True).execute()
+                
         #Create a sheet parser to generate a Job with a results collection
-        sheets_parser = GoogleSheetsJobParser()
+        sheets_parser = GoogleSheetsJobParser(self.view)
 
         #Run sheets parser and get the results collection in a job object
         job = sheets_parser.parse_document(self.sheets_service, file_id)
         
-        #remove the unique key PROCESS from the filename now the file has been processed
-        self.service.files().update(fileId=file_id, body={'name': sheet_name.replace('PROCESS ', '')}, supportsTeamDrives=True).execute()
         
         
         if job is not None:
